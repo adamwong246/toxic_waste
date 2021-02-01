@@ -205,6 +205,10 @@ script.on_event(defines.events.on_marked_for_deconstruction, pre_mined)
 
 script.on_nth_tick(shared.update_rate, function()
 	for unit_number, unit_data in pairs(global.units) do
+
+    log(serpent.block(unit_number))
+    log(serpent.block(unit_data))
+
 		local entity = unit_data.entity
 		local powersource = unit_data.powersource
 		local combinator = unit_data.combinator
