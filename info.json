@@ -1,8 +1,8 @@
 {
   "name": "toxic_waste",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "title": "Toxic Waste",
-  "description": "The creation of Science Packs also produces a nearly useless and dangerous byproduct.",
+  "description": "Recipes also make useless Scrap",
   "factorio_version": "1.1",
   "dependencies": [
     "base >= 0.15.0"

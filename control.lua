@@ -1,6 +1,6 @@
 --control.lua
 
-require 'sequestor/control'
+-- require 'sequestor/control'
 
 -- script.on_event(defines.events.on_built_entity,
 --   function(event)
