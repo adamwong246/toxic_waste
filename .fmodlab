@@ -1,8 +1,12 @@
+locale/
+sequestor/
+
 control.lua
 data.lua
 info.json
 locale/
 README.md
-settings.lua
 thumbnail.png
+settings.lua
+scrap.lua
 updateRecipes.lua

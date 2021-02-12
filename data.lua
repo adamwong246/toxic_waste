@@ -1,5 +1,7 @@
 --data.lua
 
+require 'sequestor/data'
+
 require 'updateRecipes'
 require 'scrap'
 
@@ -130,6 +132,6 @@ require 'scrap'
 --         fade_out_ticks = 20
 --     }
 -- }
-
-
-log("LOADED")
+--
+--
+-- log("LOADED")
