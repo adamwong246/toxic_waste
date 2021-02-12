@@ -1,11 +1,12 @@
 {
   "name": "toxic_waste",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "title": "Toxic Waste",
   "description": "Recipes also make useless Scrap",
   "factorio_version": "1.1",
   "dependencies": [
-    "base >= 0.15.0"
+    "base >= 0.15.0",
+    "Flare Stack >= 2.2.10"
   ],
   "author": "adamwong246",
   "contact": "adamwong246@gmail.com",
