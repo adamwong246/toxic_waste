@@ -1,7 +1,8 @@
-info.json
-README.md
-data.lua
 control.lua
+data.lua
+info.json
+locale/
+README.md
 settings.lua
 thumbnail.png
-locale/
+updateRecipes.lua
