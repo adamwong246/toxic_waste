@@ -4,6 +4,7 @@ require 'sequestor/data'
 
 require 'updateRecipes'
 require 'scrap'
+require 'garbagefill'
 
 -- local scrapCompactorRecipe =
 -- {

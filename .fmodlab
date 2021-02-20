@@ -1,6 +1,5 @@
 locale/
 sequestor/
-
 control.lua
 data.lua
 info.json
@@ -10,3 +9,4 @@ thumbnail.png
 settings.lua
 scrap.lua
 updateRecipes.lua
+garbagefill.lua
