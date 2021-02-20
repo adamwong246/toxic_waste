@@ -1,12 +1,10 @@
-locale/
-sequestor/
-control.lua
 data.lua
+garbagefill.lua
 info.json
 locale/
 README.md
-thumbnail.png
-settings.lua
 scrap.lua
+settings.lua
+thumbnail.png
 updateRecipes.lua
-garbagefill.lua
+

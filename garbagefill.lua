@@ -10,10 +10,15 @@ local collisionMask = {
 -- "colliding-with-tiles-only"
 }
 
+local tint = {0.85, 0.25, 0.25, 1}
+
 local garbagefillItem =   {
     type = "item",
     name = "garbagefill",
-    icon = "__base__/graphics/icons/landfill.png",
+    icons = {{
+      icon = "__base__/graphics/icons/landfill.png",
+      tint = tint
+    }},
     icon_size = 64, icon_mipmaps = 4,
     subgroup = "terrain",
     order = "c[landfill]-a[dirt]",
@@ -23,8 +28,7 @@ local garbagefillItem =   {
       result = "garbagefill",
       condition_size = 1,
       condition = collisionMask
-    },
-    tint = {0.1, 0.1, 0.1, 0.1}
+    }
   }
 
 local garbagefillRecipe = {
@@ -35,7 +39,7 @@ local garbagefillRecipe = {
     category = "crafting",
     ingredients =
     {
-      {"scrap", 1}
+      {"scrap", 100}
     },
     result= "garbagefill",
     result_count = 1
@@ -44,9 +48,9 @@ local garbagefillRecipe = {
 local garbagefillTile = table.deepcopy(data.raw["tile"]["landfill"])
 
 garbagefillTile.name = "garbagefill"
-garbagefillTile.tint = {0.85, 0.25, 0.25, 1}
-garbagefillTile.effect_color= {0.85, 0.25, 0.25, 1}
-garbagefillTile.pollution_absorption_per_second = -0.1
+garbagefillTile.tint = tint
+-- garbagefillTile.effect_color= {0.85, 0.25, 0.25, 1}
+garbagefillTile.pollution_absorption_per_second = -0.001
 garbagefillTile.collision_mask = collisionMask
 -- garbagefillTile.layer_group = "ground"
 -- garbagefillTile.minable = {mining_time = 0.1, result = "garbagefill"}
