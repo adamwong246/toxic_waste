@@ -1,10 +1,13 @@
+garbagefire.lua
+control.lua
 data.lua
 garbagefill.lua
+voidfill.lua
+voidingMachine.lua
 info.json
 locale/
 README.md
 scrap.lua
-settings.lua
 thumbnail.png
 updateRecipes.lua
-
+sludge.lua

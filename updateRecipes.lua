@@ -1,6 +1,10 @@
 for ndx, recipe in pairs(data.raw.recipe) do
     if (
-      (recipe.hidden ~= true) and (recipe.category ~= "oil-processing" and recipe.category ~= "chemistry" and recipe.category ~= "centrifuging")
+      (recipe.hidden ~= true) and (
+        recipe.category ~= "oil-processing" and
+        recipe.category ~= "chemistry" and
+        recipe.category ~= "centrifuging"
+    )
     ) then
         if(recipe.result) then
             data.raw.recipe[recipe.name].result = nil;

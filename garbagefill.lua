@@ -1,35 +1,54 @@
--- I'm not sure what this ought to be
-local collisionMask = {
--- -- "ground-tile",
--- "water-tile",
--- "resource-layer",
--- "doodad-layer",
--- "floor-layer",
--- "item-layer",
--- "object-layer",
--- "colliding-with-tiles-only"
-}
+local CollisionMaskUtil = require("__core__.lualib.collision-mask-util")
+local layer1 = CollisionMaskUtil.get_first_unused_layer()
+local layer2 = CollisionMaskUtil.get_first_unused_layer()
 
-local tint = {0.85, 0.25, 0.25, 1}
+-- you CAN pave over Garbage
+local garbageFillMask = {layer1}
 
-local garbagefillItem =   {
+-- you CAN NOT pave over a Sacfice Zone
+local sacrificeZoneMask = {layer1,  "water-tile", "floor-layer", "item-layer", "object-layer"}
+
+local redTint = {0.9, 0.25, 0.5, 0.8}
+local darkRedTint = {1, 0, 1, 0.9}
+-- local darkRedTint = {1, 0, 1, 0.9}
+
+local garbagefillItem = {
     type = "item",
     name = "garbagefill",
     icons = {{
-      icon = "__base__/graphics/icons/landfill.png",
-      tint = tint
+        icon = "__base__/graphics/icons/landfill.png",
+        tint = redTint
     }},
-    icon_size = 64, icon_mipmaps = 4,
+    icon_size = 64,
+    icon_mipmaps = 4,
     subgroup = "terrain",
     order = "c[landfill]-a[dirt]",
     stack_size = 100,
-    place_as_tile =
-    {
-      result = "garbagefill",
-      condition_size = 1,
-      condition = collisionMask
+    place_as_tile = {
+        result = "garbagefill",
+        condition_size = 1,
+        condition = garbageFillMask
     }
-  }
+}
+
+local sacrificefillItem = {
+    type = "item",
+    name = "sacrificefill",
+    icons = {{
+        icon = "__base__/graphics/icons/landfill.png",
+        tint = darkRedTint
+    }},
+    icon_size = 64,
+    icon_mipmaps = 4,
+    subgroup = "terrain",
+    order = "c[landfill]-a[dirt]",
+    stack_size = 100,
+    place_as_tile = {
+        result = "sacrificefill",
+        condition_size = 1,
+        condition = sacrificeZoneMask
+    }
+}
 
 local garbagefillRecipe = {
     type = "recipe",
@@ -37,25 +56,58 @@ local garbagefillRecipe = {
     energy_required = 0.5,
     enabled = true,
     category = "crafting",
-    ingredients =
-    {
-      {"scrap", 100}
-    },
-    result= "garbagefill",
+    ingredients = {{"scrap", 100}},
+    result = "garbagefill",
+    result_count = 1
+}
+
+local sacrificefillRecipe = {
+    type = "recipe",
+    name = "sacrificefill",
+    energy_required = 0.5,
+    enabled = true,
+    category = "crafting",
+    ingredients = {{"scrap", 100}},
+    result = "sacrificefill",
     result_count = 1
 }
 
 local garbagefillTile = table.deepcopy(data.raw["tile"]["landfill"])
-
 garbagefillTile.name = "garbagefill"
-garbagefillTile.tint = tint
--- garbagefillTile.effect_color= {0.85, 0.25, 0.25, 1}
+garbagefillTile.tint = redTint
 garbagefillTile.pollution_absorption_per_second = -0.001
-garbagefillTile.collision_mask = collisionMask
--- garbagefillTile.layer_group = "ground"
--- garbagefillTile.minable = {mining_time = 0.1, result = "garbagefill"}
--- garbagefillTile.layer = 57
+garbagefillTile.collision_mask = garbageFillMask
+garbagefillTile.destructible = false;
+garbagefillTile.walking_speed_modifier = 0.3;
+-- If you want the tile to not be mineable, don't specify the minable property.
+-- garbagefillTile.minable = false;
+-- garbagefillTile.layer = layer;
+
+local sacrificefillTile = table.deepcopy(data.raw["tile"]["landfill"])
+sacrificefillTile.name = "sacrificefill"
+sacrificefillTile.tint = darkRedTint
+sacrificefillTile.pollution_absorption_per_second = -0.001
+sacrificefillTile.collision_mask = sacrificeZoneMask
+sacrificefillTile.destructible = false;
+sacrificefillTile.walking_speed_modifier = 0.3;
+-- If you want the tile to not be mineable, don't specify the minable property.
+-- garbagefillTile.minable = false;
+-- sacrificefillTile.layer = layer;
 
 data:extend{
-    garbagefillItem, garbagefillRecipe, garbagefillTile
+    garbagefillItem, garbagefillRecipe, garbagefillTile, 
+    sacrificefillItem, sacrificefillRecipe,sacrificefillTile,
 }
+
+local landfillTile = table.deepcopy(data.raw["tile"]["landfill"])
+landfillTile.collision_mask = {"ground-tile", layer1}
+landfillTile.tint = {0, 0, 1, 0.9}
+data:extend{
+    landfillTile
+}
+
+-- data.raw.tile["landfill"].collision_mask ={
+--     "ground-tile", layer1
+-- }
+
+

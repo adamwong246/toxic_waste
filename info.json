@@ -1,12 +1,11 @@
 {
   "name": "toxic_waste",
-  "version": "0.0.13",
+  "version": "0.0.17",
   "title": "Toxic Waste",
-  "description": "Recipes also make useless Scrap",
+  "description": "Recipes also make useless Scrap. Bury it in the ground as polluting Garbagefill.",
   "factorio_version": "1.1",
   "dependencies": [
-    "base >= 1.1.21",
-    "Flare Stack = 2.2.10"
+    "base >= 1.1.21"
   ],
   "author": "adamwong246",
   "contact": "adamwong246@gmail.com",

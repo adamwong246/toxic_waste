@@ -8,7 +8,6 @@ local scrap = {
     subgroup = "other",
     order = "e-scrap",
     stack_size = 1,
-    place_result = "scrap-on-ground"
 }
 
 local scrapRecipe =
@@ -16,7 +15,6 @@ local scrapRecipe =
     type = "recipe",
     name = "scrap",
     localised_name = "scrap",
-    --category = "transport",
     enabled = false,
     ingredients =
     {
@@ -32,7 +30,6 @@ local scrapOnGround = {
     localised_name = "scrap",
     icon = "__base__/graphics/icons/wall-remnants.png",
     icon_size = 64,
-    -- flags = {},
     flags = {"placeable-off-grid", "not-on-map"},
     collision_box = {{ - 0.14, - 0.14}, {0.14, 0.14}},
     selection_box = {{ - 0.17, - 0.17}, {0.17, 0.17}},
