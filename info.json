@@ -1,8 +1,8 @@
 {
   "name": "toxic_waste",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "title": "Toxic Waste",
-  "description": "Recipes also make useless Scrap. Bury it in the ground as polluting Garbagefill.",
+  "description": "All recipes produce polluting scrap",
   "factorio_version": "1.1",
   "dependencies": [
     "base >= 1.1.21"

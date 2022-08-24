@@ -1,60 +1,40 @@
-script.on_event(defines.events.on_player_built_tile, function(event)
-  log(serpent.block(event));
+script.on_event(defines.events.on_player_dropped_item, function(event)
+  -- log(serpent.block(event.entity.surface));
+
+  if (event.entity.stack.name == "scrap") then
+    event.entity.surface.set_tiles({
+      {
+        name = "sacrificefill", position = event.entity.position
+      }
+    })
+  end
+
 end)
 
--- function died(event)
---   log('died');
---   log(serpent.block(event.entity.get_inventory(defines.inventory.chest).get_contents()));
--- end
+script.on_event(defines.events.on_entity_died, function(event)
 
--- function dropped(event)
---   log('droped');
---   log(event.entity.prototype.name);
---   log(event.entity.prototype.type);
--- end
+  if ( 
+    event.entity.valid and 
+    event.entity.get_inventory(defines.inventory.chest) and 
+    event.entity.get_inventory(defines.inventory.chest).get_item_count('scrap') > 1) then
+    local p = event.entity.position;
 
--- script.on_event(defines.events.on_entity_died, died)
--- script.on_event(defines.events.on_player_dropped_item, dropped)
+    for i = 1,event.entity.get_inventory(defines.inventory.chest).get_item_count('scrap'),1 
+    do 
 
+      repeat
+        p.x = p.x + math.random(-1,1)
+        p.y = p.y + math.random(-1,1)  
 
--- script.on_event(defines.events.on_built_entity, function(event)
---   if event.created_entity.name == "garbagefill" then
---       event.created_entity.destructible = false
---   end
+        if (event.entity.surface.get_tile(p).valid ~= true) then break end
+      until(event.entity.surface.get_tile(p).name ~= "sacrificefill" )
 
---   if event.created_entity.name == "sacrificefill" then
---       event.created_entity.destructible = false
---   end
--- end)
+      if (event.entity.surface.get_tile(p).valid == true) then 
+        event.entity.surface.set_tiles({{name = "sacrificefill", position = p}})
+      end
+      
+      
+    end
 
--- script.on_event(defines.events.on_robot_built_entity, function(event)
---   if event.created_entity.name == "garbagefill" then
---       event.created_entity.destructible = false
---   end
-
---   if event.created_entity.name == "sacrificefill" then
---       event.created_entity.destructible = false
---   end
--- end)
-
--- script.on_event(defines.events.script_raised_revive, function(event)
--- local entity = event.entity or event.created_entity
---   if event.created_entity.name == "garbagefill" then
---       event.created_entity.destructible = false
---   end
-
---   if event.created_entity.name == "sacrificefill" then
---       event.created_entity.destructible = false
---   end
--- end)
-
--- script.on_event(defines.events.script_raised_built, function(event)
---   local entity = event.entity or event.created_entity
---   if event.created_entity.name == "garbagefill" then
---       event.created_entity.destructible = false
---   end
-
---   if event.created_entity.name == "sacrificefill" then
---       event.created_entity.destructible = false
---   end
--- end)
+  end
+end)

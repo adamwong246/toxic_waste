@@ -10,7 +10,6 @@ local sacrificeZoneMask = {layer1,  "water-tile", "floor-layer", "item-layer", "
 
 local redTint = {0.9, 0.25, 0.5, 0.8}
 local darkRedTint = {1, 0, 1, 0.9}
--- local darkRedTint = {1, 0, 1, 0.9}
 
 local garbagefillItem = {
     type = "item",
@@ -79,9 +78,6 @@ garbagefillTile.pollution_absorption_per_second = -0.001
 garbagefillTile.collision_mask = garbageFillMask
 garbagefillTile.destructible = false;
 garbagefillTile.walking_speed_modifier = 0.3;
--- If you want the tile to not be mineable, don't specify the minable property.
--- garbagefillTile.minable = false;
--- garbagefillTile.layer = layer;
 
 local sacrificefillTile = table.deepcopy(data.raw["tile"]["landfill"])
 sacrificefillTile.name = "sacrificefill"
@@ -90,24 +86,17 @@ sacrificefillTile.pollution_absorption_per_second = -0.001
 sacrificefillTile.collision_mask = sacrificeZoneMask
 sacrificefillTile.destructible = false;
 sacrificefillTile.walking_speed_modifier = 0.3;
--- If you want the tile to not be mineable, don't specify the minable property.
--- garbagefillTile.minable = false;
--- sacrificefillTile.layer = layer;
 
 data:extend{
     garbagefillItem, garbagefillRecipe, garbagefillTile, 
     sacrificefillItem, sacrificefillRecipe,sacrificefillTile,
 }
 
-local landfillTile = table.deepcopy(data.raw["tile"]["landfill"])
-landfillTile.collision_mask = {"ground-tile", layer1}
+local landfillTile = table.deepcopy(data.raw["item"]["landfill"])
 landfillTile.tint = {0, 0, 1, 0.9}
+landfillTile.place_as_tile.condition = { layer1 }
+
+
 data:extend{
     landfillTile
 }
-
--- data.raw.tile["landfill"].collision_mask ={
---     "ground-tile", layer1
--- }
-
-

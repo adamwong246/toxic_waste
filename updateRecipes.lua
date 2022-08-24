@@ -16,14 +16,16 @@ for ndx, recipe in pairs(data.raw.recipe) do
                     name = "scrap",
                 type = "item"},
             };
-            else if (recipe.results) then
-                table.insert(data.raw.recipe[recipe.name].results, {amount = 1,
-                    name = "scrap",
-                type = "item"});
+            recipe.main_product = recipe.name
+        else if (recipe.results) then
+            table.insert(recipe.results, {amount = 1, name = "scrap", type = "item"});
+            recipe.icon = "__base__/graphics/icons/landfill.png";
+            recipe.icon_size = 64;
+            recipe.icon_mipmaps = 4;
             end
         end
 
-        recipe.main_product = recipe.name
+        
     end
 
     data:extend({recipe})
